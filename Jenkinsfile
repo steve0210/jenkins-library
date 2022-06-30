@@ -18,8 +18,8 @@ pipeline {
 					git credentialsId: '868a65c9-9ad7-48a0-b454-364c2f9cc8f0', url: 'git@github.com:CBLPath/tools.git'
 				}
 				script {
-					labisDbSeedSandboxDatabase()
-					labisDbSeedSandboxSecrets()
+					labisDbSeedSandbox.database()
+					labisDbSeedSandbox.secrets()
 				}
             }
         }
