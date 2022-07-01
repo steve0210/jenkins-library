@@ -53,7 +53,7 @@ pipeline {
         stage('Build') {
             steps {
 				script {
-					echo "Hello ${IMAGE_TAG} : ${image_tag}"
+					echo "Hello ${image_tag}"
 				}
             }
         }
