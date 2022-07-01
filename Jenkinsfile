@@ -49,7 +49,7 @@ pipeline {
             steps {
 				script {
     				docker.withRegistry('http://10.208.42.130:5000') {
-						def image = docker.build("labis_db_seed:${env.BUILD_ID}", "--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD")
+						def image = docker.build("labis_db_seed:${env.BUILD_ID}", '--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD')
 						echo "Hello ${imageTag}"
 					}
 				}
