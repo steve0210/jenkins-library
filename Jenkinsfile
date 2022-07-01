@@ -4,7 +4,6 @@ pipeline {
     agent any
 
 	environment {
-		LABIS_IMAGE_REGISTRY = "10.208.42.130:5000/"
 		MYSQL_USER_NAME = credentials('mysql-user-name')
 		MYSQL_USER_PASSWORD = credentials('mysql-user-password')
 	}
@@ -30,6 +29,7 @@ pipeline {
             steps {
                 git branch: 'main', credentialsId: '868a65c9-9ad7-48a0-b454-364c2f9cc8f0', url: 'git@github.com:SHUSA/labis_db_seed.git'
 				script {
+					image_tag = "ddd"
 					labisDbSeedSandbox.database()
 					labisDbSeedSandbox.secrets()
 				}
@@ -52,7 +52,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Hello World'
+                echo "Hello ${IMAGE_TAG} : ${image_tag}"
             }
         }
     }
