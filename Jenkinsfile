@@ -8,7 +8,7 @@ pipeline {
 		MYSQL_USER_PASSWORD = credentials('mysql-user-password')
 	}
 	options {
-	  buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
+	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
 	}
     stages {
 		stage('Setup') {
@@ -23,13 +23,10 @@ pipeline {
             when {
                 environment name: 'IMAGE_TYPE', value: 'sandbox'
             }
-			environment {
-				IMAGE_TAG = "dev"
-			}
             steps {
                 git branch: 'main', credentialsId: '868a65c9-9ad7-48a0-b454-364c2f9cc8f0', url: 'git@github.com:SHUSA/labis_db_seed.git'
 				script {
-					image_tag = "ddd"
+					imageTag = "dev"
 					labisDbSeedSandbox.database()
 					labisDbSeedSandbox.secrets()
 				}
@@ -39,12 +36,10 @@ pipeline {
             when {
                 environment name: 'IMAGE_TYPE', value: 'production'
             }
-			environment {
-				IMAGE_TAG = "prod"
-			}
             steps {
                 git branch: 'main', credentialsId: '868a65c9-9ad7-48a0-b454-364c2f9cc8f0', url: 'git@github.com:SHUSA/labis_db_seed.git'
 				script {
+					imageTag = "prod"
 					labisDbSeedProduction.database()
 					labisDbSeedProduction.secrets()
 				}
@@ -52,7 +47,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-				echo "Hello ${image_tag}"
+				script {
+    				docker.withRegistry('http://10.208.42.130:5000') {
+						def image = docker.build("labis_db_seed:${env.BUILD_ID}", "--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD")
+						echo "Hello ${imageTag}"
+					}
+				}
             }
         }
     }
