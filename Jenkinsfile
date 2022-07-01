@@ -52,7 +52,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Hello ${IMAGE_TAG} : ${image_tag}"
+				script {
+					echo "Hello ${IMAGE_TAG} : ${image_tag}"
+				}
             }
         }
     }
