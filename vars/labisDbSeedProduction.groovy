@@ -5,7 +5,7 @@ def database() {
 #   gem install mysql2
 #
 # Ensure the MySQL gem is defined in your Gemfile
-#   gem 'mysql2'
+#   gem \'mysql2\'
 #
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
@@ -17,31 +17,24 @@ default: &default
 
 labis_vanilla_test:
   <<: *default
-  database: enterprise_demo
+  database: lmo_tpcm_production
   username: <%= ENV["MYSQL_USER_NAME"] %>
   password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: 10.220.16.32
-
-labis_sap_test:
-  <<: *default
-  database: enterprise_demo
-  username: <%= ENV["MYSQL_USER_NAME"] %>
-  password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: 10.220.16.32
+  host: 10.222.12.20
 
 labis_vanilla_mercator_test:
   <<: *default
-  database: mercator_demo
+  database: mercator_production
   username: <%= ENV["MYSQL_USER_NAME"] %>
   password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: 10.220.16.32
+  host: 10.222.12.20
 
 production:
   <<: *default
-  database: enterprise_demo
+  database: lmo_tpcm_production
   username: <%= ENV["MYSQL_USER_NAME"] %>
   password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: 10.220.16.32
+  host: 10.222.12.20
 ''', fileName: 'config/database.yml')])
 
 }
