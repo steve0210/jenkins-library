@@ -1,5 +1,3 @@
-// @Library('my-pipeline-library') _
-
 def githubcreds = 'ff90f0e9-54be-4568-a808-2ed15a552f17'
 def imageTag
 
@@ -31,8 +29,6 @@ pipeline {
                 git branch: 'main', credentialsId: githubcreds, url: 'git@github.com:SHUSA/labis_db_seed.git'
 				script {
 					imageTag = "dev"
-					// labisDbSeedSandbox.database()
-					// labisDbSeedSandbox.secrets()
 				}
             }
         }
@@ -44,22 +40,13 @@ pipeline {
                 git branch: 'main', credentialsId: githubcreds, url: 'git@github.com:SHUSA/labis_db_seed.git'
 				script {
 					imageTag = "prod"
-					// labisDbSeedProduction.database()
-					// labisDbSeedProduction.secrets()
 				}
             }
         }
         stage('Build') {
             steps {
-/*
-				script {
-    				docker.withRegistry('http://10.208.42.130:5000') {
-						def image = docker.build("labis_db_seed:${env.BUILD_ID}", '--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD .')
-						echo "Hello ${imageTag}"
-						image.push(imageTag)
-					}
-				}
-*/
+				echo "Hello ${MYSQL_CREDS} : ${MYSQL_CREDS_USR} : ${MYSQL_CREDS_PSW}"
+				echo "Hello ${MYSQL_USER_NAME} : ${MYSQL_USER_PASSWORD}"
             }
         }
     }
