@@ -6,8 +6,8 @@ pipeline {
 
 	environment {
 		MYSQL_CREDS = credentials('labis-mysql-creds')
-		MYSQL_USER_NAME = env.MYSQL_CREDS_USR
-		MYSQL_USER_PASSWORD = env.MYSQL_CREDS_PSW
+		MYSQL_USER_NAME = "${env.MYSQL_CREDS_USR}"
+		MYSQL_USER_PASSWORD = "${env.MYSQL_CREDS_PSW}"
 	}
 	options {
 	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
