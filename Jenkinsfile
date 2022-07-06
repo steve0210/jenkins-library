@@ -9,13 +9,9 @@ pipeline {
 		MYSQL_USER_NAME = "${env.MYSQL_CREDS_USR}"
 		MYSQL_USER_PASSWORD = "${env.MYSQL_CREDS_PSW}"
 	}
-	options {
-	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
-	}
     stages {
 		stage('Setup') {
 			steps {
-				cleanWs deleteDirs: true, patterns: [[pattern: 'config/*.yml', type: 'INCLUDE']]
 				dir('repos/tools') {
 					git credentialsId: githubcreds, url: 'git@github.com:CBLPath/tools.git'
 				}
