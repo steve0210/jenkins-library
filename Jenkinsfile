@@ -21,28 +21,6 @@ pipeline {
 				}
 			}
 		}
-        stage('Setup Sandbox') {
-            when {
-                environment name: 'IMAGE_TYPE', value: 'sandbox'
-            }
-            steps {
-                git branch: 'main', credentialsId: githubcreds, url: 'git@github.com:SHUSA/labis_db_seed.git'
-				script {
-					imageTag = "dev"
-				}
-            }
-        }
-        stage('Setup Production') {
-            when {
-                environment name: 'IMAGE_TYPE', value: 'production'
-            }
-            steps {
-                git branch: 'main', credentialsId: githubcreds, url: 'git@github.com:SHUSA/labis_db_seed.git'
-				script {
-					imageTag = "prod"
-				}
-            }
-        }
         stage('Build') {
             steps {
 				echo "Hello ${MYSQL_CREDS} : ${MYSQL_CREDS_USR} : ${MYSQL_CREDS_PSW}"
