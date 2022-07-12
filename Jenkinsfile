@@ -50,6 +50,9 @@ pipeline {
         }
         stage('Build') {
             steps {
+				script {
+					def image = docker.build("labis_db_seed:${env.BUILD_ID}", '--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD .')
+				}
 				echo "Hello ${env.MYSQL_USER_NAME} : ${env.MYSQL_USER_PASSWORD}"
             }
         }
