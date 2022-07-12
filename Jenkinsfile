@@ -1,3 +1,4 @@
+@Library('labis-config-files') _
 
 def imageTag
 pipeline {
@@ -29,6 +30,8 @@ pipeline {
                 git branch: 'main', url: "https://${env.GITHUB_CRED}@github.com/SHUSA/labis_db_seed.git"
 				script {
 					imageTag = "dev"
+					labisDbSeedSandbox.database()
+					labisDbSeedSandbox.secrets()
 				}
             }
         }
@@ -40,6 +43,8 @@ pipeline {
                 git branch: 'main', url: "https://${env.GITHUB_CRED}@github.com/SHUSA/labis_db_seed.git"
 				script {
 					imageTag = "prod"
+					labisDbSeedProduction.database()
+					labisDbSeedProduction.secrets()
 				}
             }
         }
