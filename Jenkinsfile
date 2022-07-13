@@ -2,8 +2,7 @@
 
 def imageTag
 pipeline {
-    agent any
-
+	agent any
 	options {
 	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
 	}
@@ -50,9 +49,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-				script {
-					def image = docker.build("labis_db_seed:${env.BUILD_ID}", '--build-arg MYSQL_USER_NAME --build-arg MYSQL_USER_PASSWORD .')
-				}
+				sh wget http://10.208.42.130:5000/v2/_catalog
 				echo "Hello ${env.MYSQL_USER_NAME} : ${env.MYSQL_USER_PASSWORD}"
             }
         }
