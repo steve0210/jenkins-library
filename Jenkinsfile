@@ -49,7 +49,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-				sh "wget http://10.208.42.130:5000/v2/_catalog"
+				sh "curl http://10.208.42.130:5000/v2/_catalog"
 				echo "Hello ${env.MYSQL_USER_NAME} : ${env.MYSQL_USER_PASSWORD}"
             }
         }
