@@ -24,6 +24,7 @@ spec:
 	environment {
 	    GITHUB_CRED = credentials('steve-github-pat')
 		MYSQL_CREDS = credentials('labis-mysql-creds')
+		REGISTRY_SERVER = "10.208.42.130:5000"
 	}
     stages {
 		stage('Setup') {
@@ -64,10 +65,9 @@ spec:
             steps {
             	container(name: 'kaniko', shell: '/busybox/sh') {
                 	sh """#!/busybox/sh
-                        /kaniko/executor --context='.' --build-arg MYSQL_USER_NAME=${env.MYSQL_CREDS_USR} --build-arg MYSQL_USER_PASSWORD=${env.MYSQL_CREDS_PSW} --insecure --insecure-registry=10.208.42.130:5000 --destination=10.208.42.130:5000/labis_db_seed:${env.BUILD_ID} --destination=10.208.42.130:5000/labis_db_seed:${imageTag}
+                        /kaniko/executor --context='.' --build-arg MYSQL_USER_NAME=${env.MYSQL_CREDS_USR} --build-arg MYSQL_USER_PASSWORD=${env.MYSQL_CREDS_PSW} --insecure --insecure-registry=${env.REGISTRY_SERVER} --destination=${env.REGISTRY_SERVER}/labis_db_seed:${env.BUILD_ID} --destination=${env.REGISTRY_SERVER}/labis_db_seed:${imageTag}
                     """
 				}
-				echo "Hello ${env.MYSQL_CREDS_USR} : ${env.MYSQL_CREDS_PSW}"
             }
         }
     }
