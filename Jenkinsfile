@@ -2,9 +2,9 @@
 
 def imageTag
 pipeline {
-agent {
-    kubernetes {
-      yaml '''
+	agent {
+	    kubernetes {
+	      yaml '''
 kind: Pod
 spec:
   containers:
@@ -16,6 +16,8 @@ spec:
     args:
     - 9999999
 '''
+		}
+	}
 	options {
 	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
 	}
