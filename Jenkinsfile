@@ -2,7 +2,20 @@
 
 def imageTag
 pipeline {
-	agent any
+agent {
+    kubernetes {
+      yaml '''
+kind: Pod
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
+'''
 	options {
 	 	buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '1', daysToKeepStr: '15', numToKeepStr: '15')
 	}
@@ -49,7 +62,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-				sh "curl http://10.208.42.130:5000/v2/_catalog"
+            	container(name: 'kaniko', shell: '/busybox/sh') {
+                	sh """#!/busybox/sh
+                        /kaniko/executor --context=`pwd` --build-arg MYSQL_USER_NAME=${env.MYSQL_USER_NAME} --build-arg MYSQL_USER_PASSWORD=${env.MYSQL_USER_PASSWORD} --insecure --insecure-registry=10.208.42.130:5000 --destination=10.208.42.130:5000/labis_db_seed:${env.BUILD_ID} --destination=10.208.42.130:5000/labis_db_seed:${imageTag}
+                    """
 				echo "Hello ${env.MYSQL_USER_NAME} : ${env.MYSQL_USER_PASSWORD}"
             }
         }
