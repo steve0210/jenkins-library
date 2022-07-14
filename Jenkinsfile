@@ -66,6 +66,7 @@ spec:
                 	sh """#!/busybox/sh
                         /kaniko/executor --context=`pwd` --build-arg MYSQL_USER_NAME=${env.MYSQL_USER_NAME} --build-arg MYSQL_USER_PASSWORD=${env.MYSQL_USER_PASSWORD} --insecure --insecure-registry=10.208.42.130:5000 --destination=10.208.42.130:5000/labis_db_seed:${env.BUILD_ID} --destination=10.208.42.130:5000/labis_db_seed:${imageTag}
                     """
+				}
 				echo "Hello ${env.MYSQL_USER_NAME} : ${env.MYSQL_USER_PASSWORD}"
             }
         }
