@@ -2,18 +2,21 @@ def database() {
 	fileOperations([fileCreateOperation(fileContent: '''# MySQL. Versions 5.5.8 and up are supported.
 production:
   adapter: mysql2
-  database: cpl_enterprise_demo
-  username: <%= ENV["MYSQL_USER_NAME"] %>
-  password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: 10.212.148.33
+  database: lmo_tpcm_production
+	username: <%= ENV["MYSQL_USER_CREDS"].split(':')[0] %>
+  password: <%= ENV["MYSQL_USER_CREDS"].split(':')[1] %>
+  host: ussigatxmys004t.us.int.sonichealthcare
+  port: 3307
   reconnect: true
 
 mercator_production:
   adapter: mysql2
-  database: mercator_demo
-  username: <%= ENV["MYSQL_USER_NAME"] %>
-  password: <%= ENV["MYSQL_USER_PASSWORD"] %>
-  host: mysqldb
+  database: mercator
+	username: <%= ENV["MYSQL_USER_CREDS"].split(':')[0] %>
+  password: <%= ENV["MYSQL_USER_CREDS"].split(':')[1] %>
+	host: ussigatxmys004t.us.int.sonichealthcare
+	port: 3307
+	reconnect: true
 ''', fileName: 'config/database.yml')])
 
 }
@@ -41,29 +44,31 @@ def servers() {
 	fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
   slide_server:
-    host: labeler
-    port: 3000
+	  host: 10.212.148.40
+	  port: 8081
   mongo_server:
-    host: 192.168.3.103
-    port: 8091
+	  host: 10.212.148.40
+	  port: 8088
+  req_viewer:
+	  host: 10.212.148.50
+	  port: 8082
   redis_server:
-    host: redisdb
-    port: 6379
-  device_server:
-    host: localhost
-    port: 9999
+	  host: 10.212.148.40
+	  port: 6379
   labis_v2:
-    host: v2qa.labis.net
-    port: 443
+	  host: v2qa.labis.net
+	  port: 443
   labis_api:
-    host: apiqa.labis.net
-    port: 443
+	  host: apiqa.labis.net
+	  port: 443
+  device_server:
+	  host: localhost
+	  port: 9999
   ssrs_server:
-    host: https://ssrsdemo.labis.net
-    folder: sandbox
-    user: administrator
-    password: password
-
+	  host: https://ssrsdemo.labis.net
+	  folder: "sandbox"
+	  user: administrator
+	  password: password
 ''', fileName: 'config/servers.yml')])
 }
 
@@ -85,7 +90,5 @@ production:
   memory: 256
   benchmarking: false
   servers: memcached:11211
-
 ''', fileName: 'config/memcached.yml')])
 }
-
