@@ -89,6 +89,6 @@ production:
   namespace: "mem-production"
   memory: 256
   benchmarking: false
-  servers: memcached:11211
+  servers: localhost:11211
 ''', fileName: 'config/memcached.yml')])
 }
