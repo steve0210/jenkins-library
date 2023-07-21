@@ -24,7 +24,7 @@ mercator_production:
 def secrets() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
-  secret: 9afebc7fffcade1cca5ce986cf00cc9eeb82c7b720bbd5b2d66dbf873b354f571f35b584d87649ca50d13e495e61977f5c2ede28baccdbbc96c588454c06cce6
+  secret: <%= ENV["SECRET_KEY_BASE"] %>
 
 ''', fileName: 'config/secrets.yml')])
 }
