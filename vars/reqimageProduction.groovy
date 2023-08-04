@@ -6,6 +6,6 @@ production:
   interface: LABISAPI
   filter: ACN
   userid: LabIS
-  password: ECML@6!2
+  password: <%= ENV["SCERIS_USER_PASSWORD"] %>@6!2
 ''', fileName: 'config/vendor.yml')])
 }
