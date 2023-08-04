@@ -8,5 +8,4 @@ production:
   userid: LabIS
   password:  <%= ENV["SCERIS_USER_PASSWORD"] %>
 ''', fileName: 'config/vendor.yml')])
-
 }
