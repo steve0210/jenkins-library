@@ -37,7 +37,7 @@ def cable() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://USSIGATXRED003P.US.INT.SONICHEALTHCARE:6379/1
 ''', fileName: 'config/cable.yml')])
 }
 
@@ -45,13 +45,13 @@ def servers() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
   slide_server:
-    host: 10.212.16.141
-    port: 8081
+    host: labeler-prod
+    port: 3000
   redis_server:
     host: USSIGATXRED003P.US.INT.SONICHEALTHCARE
     port: 6379
   legacy_server:
-    host: cpl.labis.net
+    host: cplpli.labis.net
     port:
 ''', fileName: 'config/servers.yml')])
 }

@@ -44,23 +44,23 @@ def servers() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
   slide_server:
-    host: 10.212.16.141
-    port: 8081
+    host: labeler-prod
+    port: 3000
   mongo_server:
     host: 10.214.5.134
     port: 8088
   req_viewer:
-    host: 10.212.16.141
-    port: 8082
+    host: reqimage-prod
+    port: 3000
   redis_server:
     host: USSIGATXRED003P.US.INT.SONICHEALTHCARE
     port: 6379
   labis_api:
-    host: apitest.labis.net
+    host: apipli.labis.net
   labis_v2:
-    host: v2test.labis.net
+    host: v2pli.labis.net
   labis_server:
-    host: v2test.labis.net
+    host: v2pli.labis.net
   device_server:
     host: localhost
     port: 9999

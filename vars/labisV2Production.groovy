@@ -59,14 +59,14 @@ def servers() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
   labis_legacy_server:
-    host: cpl.labis.net
+    host: cplpli.labis.net
     port:
   labis_api_server:
-    host: api.labis.net
+    host: apipli.labis.net
     port:
   barcode_server:
-    host: 10.212.16.141
-    port: 8200
+    host: labeler-prod
+    port: 8080
   cbl_api_server:
     host: labflowapidemo.labis.net
   cbl_legacy_server:
