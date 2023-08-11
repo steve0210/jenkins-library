@@ -28,7 +28,7 @@ legacy_production:
 def secrets() {
   fileOperations([fileCreateOperation(fileContent: '''# Be sure to restart your server when you modify this file.
 production:
-  secret: <%= ENV["SECRET_KEY_BASE"] %>
+  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
 
 ''', fileName: 'config/secrets.yml')])
 }
